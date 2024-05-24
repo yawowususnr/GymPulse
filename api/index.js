@@ -2,15 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Timeperiod = require("./models/Timeperiod");
-const { parseISO, parseJSON, format } = require("date-fns");
 var moment = require('moment');
 require("dotenv").config();
 
-app = express();
-app.use(express.json());
-
 mongoose.connect(process.env.MONGO_URL);
 
+// express app setUp
+app = express();
+app.use(express.json());
 app.use(
   cors({
     credentials: true,
@@ -44,10 +43,12 @@ app.get("/entries", async (req, res) => {
   res.json(allTimeStamps);
 });
 
+
 app.get("/entries/thursday", async (req, res) => {
-  const thursdayStamps = await Timeperiod.find({ day: "Thursday" }).exec();
+  const thursdayStamps = await Timeperiod.find({ day: "Friday" }).exec();
   res.json(thursdayStamps);
 });
+
 
 app.post("/entries", async (req, res) => {
   const { occupancy } = req.body;
