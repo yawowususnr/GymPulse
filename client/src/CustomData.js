@@ -1,4 +1,3 @@
-import { parseISO, format } from "date-fns";
 
 function getRandomDateInRange(startDate, endDate, startHour, endHour) {
   const date = new Date(
@@ -132,3 +131,23 @@ const customData = [
 ];
 
 export default customData;
+
+async function filterDatesByDayOfWeekAsync(dates, dayOfWeek) {
+  const filteredDates = await Promise.all(
+    dates.map(async (date) => {
+      const checkDate = new Date(date);
+      if (checkDate.getUTCDay() === dayOfWeek) {
+        return date;
+      }
+      return null;
+    })
+  );
+  return filteredDates.filter((date) => date !== null);
+}
+
+function changeToTime(utc) {
+      const dateObj = parseJSON(utc);
+    // Format the date to HH:MM format
+    const formattedTime = format(dateObj, "hh:mm");
+    console.log("222", formattedTime); // Output: 14:30
+}

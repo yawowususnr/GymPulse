@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { PureComponent } from "react";
 import { useEffect, useState } from "react";
 import { parseISO, format } from "date-fns";
-import {LineChart, Line, XAxis, YAxis,CartesianGrid,Tooltip,Legend,ResponsiveContainer,} from "recharts";
+import {ScatterChart, LineChart, Line, XAxis, YAxis,CartesianGrid,Tooltip,Legend,ResponsiveContainer,} from "recharts";
 import customData from "../CustomData";
+
 
 async function convertArrayToHour(array) {
     await Promise.all(
@@ -51,8 +52,8 @@ export default function Thursday() {
             <div className="font-mono flex justify-center items-center mt-10">
                 <LineChart width={600} height={400} data={datesWithHours}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="day" reversed={true} scale={"auto"} />
-                    <YAxis dataKey="occupancy" />
+                    <XAxis dataKey="stamp" scale={"auto"} domain={['04:00', '22:00']} />
+                    <YAxis />
                     <Tooltip />
                     <Legend />
                     <Line
